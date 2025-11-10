@@ -3,5 +3,7 @@
 git.key.txt
 gemini.api.key.txt
 open.api.key.txt
+*.pcap
+*.pcapng
 
 
