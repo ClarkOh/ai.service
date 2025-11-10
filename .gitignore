@@ -1,0 +1,7 @@
+.env
+*.api.key.txt
+git.key.txt
+gemini.api.key.txt
+open.api.key.txt
+
+
