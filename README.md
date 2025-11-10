@@ -33,31 +33,30 @@ Python과 OpenAI API 또는 Google Gemini API를 사용한 텍스트 분석 및 
 pip install -r requirements.txt
 ```
 
-### 2. 환경 변수 설정
+### 2. API 키 설정
 
-프로젝트 루트 디렉토리에 `.env` 파일을 생성하고 API 키를 설정하세요:
+기본 코드에서는 **텍스트 파일**에서 API 키를 읽습니다. 프로젝트 루트에 다음 파일을 생성하고 첫 줄에 키를 기록하세요:
 
-```env
-# OpenAI 사용 시
-OPENAI_API_KEY=sk-proj-your-openai-key-here
-
-# Gemini 사용 시
-GEMINI_API_KEY=your-gemini-key-here
 ```
+open.api.key.txt      # OpenAI Key
+gemini.api.key.txt    # Google Gemini Key
+```
+
+> 두 파일 모두 `.gitignore`에 포함되어 있으므로 Git에 커밋되지 않습니다.
 
 #### 🔑 OpenAI API 키 발급 (유료)
 1. [OpenAI Platform](https://platform.openai.com/)에 로그인
-2. API Keys 메뉴로 이동
-3. "Create new secret key" 클릭
-4. **결제 정보 등록 필수** (최소 $5 충전)
-5. 생성된 키를 `.env` 파일에 추가
+2. API Keys 메뉴에서 "Create new secret key" 클릭
+3. **결제 수단 등록 필수** (최소 $5)
+4. 발급된 키를 `open.api.key.txt`에 붙여넣기
 
 #### 🔑 Gemini API 키 발급 (무료!)
 1. [Google AI Studio](https://makersuite.google.com/app/apikey)에 접속
 2. Google 계정으로 로그인
 3. "Get API Key" 클릭
-4. **결제 정보 불필요!** 바로 사용 가능
-5. 생성된 키를 `.env` 파일에 추가
+4. 발급된 키를 `gemini.api.key.txt`에 붙여넣기
+
+환경 변수를 선호한다면 각 클래스 생성자에 `api_key` 인자를 전달하거나 코드에서 직접 `os.getenv`를 사용하도록 수정할 수 있습니다.
 
 ## 사용 방법
 
@@ -140,7 +139,7 @@ print(expanded)
 ### OpenAI - TextAnalyzer 클래스
 
 #### `__init__(api_key=None, model="gpt-4o-mini")`
-- `api_key`: OpenAI API 키 (선택사항, 환경 변수에서 자동으로 로드)
+- `api_key`: OpenAI API 키 (선택사항, `open.api.key.txt`에서 자동으로 로드)
 - `model`: 사용할 GPT 모델
   - `gpt-4o-mini`: 빠르고 저렴 (권장)
   - `gpt-4o`: 더 정확하지만 비쌈
@@ -149,7 +148,7 @@ print(expanded)
 ### Gemini - GeminiTextAnalyzer 클래스
 
 #### `__init__(api_key=None, model="gemini-2.5-flash")`
-- `api_key`: Gemini API 키 (선택사항, gemini.api.key.txt에서 자동으로 로드)
+- `api_key`: Gemini API 키 (선택사항, `gemini.api.key.txt`에서 자동으로 로드)
 - `model`: 사용할 Gemini 모델
   - `gemini-2.5-flash`: 최신 빠른 모델 (기본값, 무료 티어) ⭐
   - `gemini-2.5-pro`: 최신 강력한 모델 (무료 티어)
